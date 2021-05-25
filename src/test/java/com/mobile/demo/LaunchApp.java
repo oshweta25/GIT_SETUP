@@ -3,6 +3,7 @@ package com.mobile.demo;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.openqa.selenium.By.ById;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
@@ -25,11 +26,25 @@ public class LaunchApp {
 		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.target.login.GateActivity");
 		dc.setCapability(AndroidMobileCapabilityType.PLATFORM_NAME, "Android");
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10");
-		dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "Galaxy");
+		dc.setCapability(MobileCapabilityType.DEVICE_NAME, "Galaxy");
 	
 		driver = new AndroidDriver<MobileElement>(url, dc);
 		System.out.println("App Launched");
 		
+		//driver.navigate().back();
+				
+		driver.findElementById("com.target.ui:id/gate_login_button").click();
+		System.out.println("Login clicked");
+	
+		driver.findElementByAccessibilityId("Show password").click();
+		System.out.println("Show Pwd clicked");
+		
+		driver.findElementByAccessibilityId("Hide password").click();
+		System.out.println("Hide Pwd clicked");
+		
+		driver.navigate().back();
+		driver.navigate().back();
+		driver.navigate().back();
 	}
 
 }
