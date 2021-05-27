@@ -12,9 +12,9 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-public class LaunchApp {
+public class LaunchTargetApp {
 
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws MalformedURLException, InterruptedException {
 
 		AppiumDriver<MobileElement> driver ;
 		
@@ -22,8 +22,15 @@ public class LaunchApp {
 		
 		DesiredCapabilities dc = new DesiredCapabilities();
 		
-		dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.target.ui");
-		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.target.login.GateActivity");
+		/*
+		 * dc.setCapability("autoGrantPermissions", true);
+		 * dc.setCapability("unlockType", "pin"); 
+		 * dc.setCapability("unlockPin", "1245");
+		 */
+		
+		
+		dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, AppConstants.TARGET_PACKAGE);
+		dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, AppConstants.TARGET_ACTIVITY);
 		dc.setCapability(AndroidMobileCapabilityType.PLATFORM_NAME, "Android");
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10");
 		dc.setCapability(MobileCapabilityType.DEVICE_NAME, "Galaxy");
@@ -36,9 +43,10 @@ public class LaunchApp {
 		driver.findElementById("com.target.ui:id/gate_login_button").click();
 		System.out.println("Login clicked");
 	
+		Thread.sleep(1000);
 		driver.findElementByAccessibilityId("Show password").click();
 		System.out.println("Show Pwd clicked");
-		
+		Thread.sleep(1000);
 		driver.findElementByAccessibilityId("Hide password").click();
 		System.out.println("Hide Pwd clicked");
 		
